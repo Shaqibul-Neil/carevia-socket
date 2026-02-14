@@ -38,9 +38,8 @@ io.on("connection", (socket) => {
   //data has the message and the receiver information
   socket.on("send_message", (data) => {
     //getting the info of room from data then broadcasts the same event with a new event and same message
-    console.log("Got Message", data);
-    socket.to(data.room).emit("receive_message", data);
     // Broadcast to EVERYONE in the room (including sender)
+    console.log("mesg", data);
     io.to(data.roomId).emit("receive_message", data);
   });
 
@@ -73,7 +72,7 @@ app.post("/emit-booking", async (req, res) => {
       clientCount: io.engine.clientsCount,
     });
   } catch (error) {
-    return res.status(500).json({ error: error.messgae });
+    return res.status(500).json({ error: error.message });
   }
 });
 
