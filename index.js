@@ -40,7 +40,8 @@ io.on("connection", (socket) => {
     //getting the info of room from data then broadcasts the same event with a new event and same message
     // Broadcast to EVERYONE in the room (including sender)
     console.log("Msg:", data);
-    io.to(data.roomId).emit("receive_message", data);
+    socket.to(data.roomId).emit("receive_message", data);
+    //do not use io.to here because io.to gives the same message again to the sender like double message, we don't need that. io.to--sends message to everyone including sender, bt socket.to sends everyone except sender
   });
 
   socket.on("typing", ({ userName, room }) => {
