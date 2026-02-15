@@ -39,7 +39,7 @@ io.on("connection", (socket) => {
   socket.on("send_message", (data) => {
     //getting the info of room from data then broadcasts the same event with a new event and same message
     // Broadcast to EVERYONE in the room (including sender)
-    console.log("mesg", data);
+    console.log("Msg:", data);
     io.to(data.roomId).emit("receive_message", data);
   });
 
